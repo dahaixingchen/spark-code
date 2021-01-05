@@ -9,6 +9,7 @@ object CaseClass {
     println(hsq == dog)
   }
 
+
 }
 
 /*样例类*/
