@@ -100,10 +100,16 @@ object ScalaFunctions {
 //    }
     println("-------8.高阶函数----------")
 
-    def computer(a:Int,b:Int,f:(Int,Int) => String)={
+    def computer(a:Int,b:Int,f:(Int,Int) => (String))={
       val res = f(a,b)
       println(res)
     }
+
+    def computer11(a:Int,b:Int,f:(Int,Int) => (String,Int,String))={
+      val res = f(a,b)
+      println(res)
+    }
+
     def computer8(a:Int,b:Int,f:(Int,Int)=> Int)={
       val value = f(a,b)
       println(value)
@@ -115,9 +121,13 @@ object ScalaFunctions {
     })
     //如果有固定多少个参数，可以用 _ 来替代这些参数
     computer(3,8,_.toString + _.toString)
-    computer(3,8,(x:Int,y:Int) =>{
+
+    //函数作为参数进行传参的时候,函数返回只有一条语句的时候可以用()来替代{}
+    computer(3,8,(x:Int,y:Int) =>(
+//      val a:Int = 10
+
       String.valueOf(x*x*y*y)
-    })
+      ))
 
     //这里的函数当做参数，函数具体的实现方式交给调用它的匿名方法去实现，
     //在定义的函数里，我们只需要关注这个 作为参数的函数的参数，返回值，
