@@ -24,6 +24,7 @@ object PartialFunction {
     }
     println(asd1())
 
+    println("----------------------------偏函数----------------------------------")
     //偏函数，定义的时候一定要先定义函数的类型其中第一个泛型表示的是输入参数，第二个泛型表示的是出参
     //注意：偏函数的定义是没有()的
     def asd2: PartialFunction[Any, String] = {
@@ -34,5 +35,6 @@ object PartialFunction {
     }
 
     println(asd2(55))
+
   }
 }

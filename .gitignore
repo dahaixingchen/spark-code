@@ -8,6 +8,7 @@ target/
 !**/src/test/**/target/
 
 ### STS ###
+.check*
 .apt_generated
 .classpath
 .factorypath

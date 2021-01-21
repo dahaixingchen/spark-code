@@ -185,6 +185,11 @@ object ScalaFunctions {
     //方法不想执行，赋值给一个变量， 不能给赋值后的函数变量
     //    val fun10 = info _
 
+    val ints = Array((2,6),(5,6),(51,64),(15,5))
+    scala.util.Sorting.quickSort(ints)(new Ordering[(Int,Int)] {
+      override def compare(x: (Int, Int), y: (Int, Int)): Int = -x._2.compareTo(y._2)
+    })
+    println(ints.toList)
   }
 
 
