@@ -25,9 +25,6 @@ object StreamingAPIState {
     }).print()
 
 
-
-
-
     ssc.start()
     ssc.awaitTermination()
   }

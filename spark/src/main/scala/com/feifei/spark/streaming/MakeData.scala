@@ -17,10 +17,10 @@ object MakeData {
             val out: OutputStream = client.getOutputStream
             val printer = new PrintStream(out)
             while (client.isConnected){
-//              num =1
-//              printer.println(s"hello ${num}")
-//              printer.println(s"hi ${num}")
-//              printer.println(s"hi ${num}")
+              num =1
+              printer.println(s"hello ${num}")
+              printer.println(s"hi ${num}")
+              printer.println(s"hi ${num}")
               printer.println("hello spark hive")
 
               Thread.sleep(1000)
