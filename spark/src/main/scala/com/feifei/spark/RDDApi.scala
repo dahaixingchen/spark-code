@@ -79,15 +79,6 @@ object RDDApi {
     //cogroup算子
     println("=====cogroup====")
     kv1.cogroup(kv2).foreach(println)
-
-
-
-
-
-
-
-
-
     while (true){}
   }
 

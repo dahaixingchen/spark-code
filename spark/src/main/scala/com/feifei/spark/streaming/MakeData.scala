@@ -18,11 +18,13 @@ object MakeData {
             val printer = new PrintStream(out)
             while (client.isConnected){
               num =1
-              printer.println(s"hello ${num}")
-              printer.println(s"hi ${num}")
-              printer.println(s"hi ${num}")
-              printer.println("hello spark hive")
+//              printer.println(s"hello ${num}")
+//              printer.println(s"hi ${num}")
+//              printer.println(s"hi ${num}")
 
+              printer.println(s"hello")
+              printer.println(s"hi")
+//              printer.println(s"hi")
               Thread.sleep(1000)
             }
           }

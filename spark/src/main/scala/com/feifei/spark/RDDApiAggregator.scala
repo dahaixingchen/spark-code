@@ -98,7 +98,6 @@ object RDDApiAggregator {
       (c1: (Int, Int), c2: (Int, Int)) => (c1._1 + c2._1, c1._2 + c2._2)
     ).mapValues(e => e._1 / e._2).foreach(println)
 
-
     println("--------avg,max,min---combine---------")
     //通过combine一步把，min,max,sum,count,avg所有数据一步全部拿到
     data.combineByKey(

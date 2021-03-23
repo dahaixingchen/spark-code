@@ -19,6 +19,6 @@ object WordCountScala {
 
     sc.textFile("./data/testdata.txt").flatMap(_.split(" ")).map((_,1)).reduceByKey(_+_).foreach(println)
 
-//    while (true){}
+    while (true){}
   }
 }
