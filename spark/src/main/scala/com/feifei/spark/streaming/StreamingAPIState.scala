@@ -19,7 +19,7 @@ object StreamingAPIState {
     val reM: DStream[(String, Int)] = data.flatMap(_.split(" ")).map((_, 1))
     val value: DStream[(String, Int)] = reM.reduceByKey(_+_)
 
-    reM.checkpoint()
+//    reM.checkpoint()
 //    resFM.print()
    reM.updateStateByKey(
       (nv:Seq[Int],ov:Option[Int]) =>{
