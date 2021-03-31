@@ -30,6 +30,7 @@ object WordCountScala {
     val flatMapRDD: RDD[String] = fileRDD.flatMap(_.split(" "))
     val mapRDD: RDD[(String, Int)] = flatMapRDD.map((_,1))
     val reduceRDD: RDD[(String, Int)] = mapRDD.reduceByKey(_+_)
+
     reduceRDD.foreach(println)
 
 

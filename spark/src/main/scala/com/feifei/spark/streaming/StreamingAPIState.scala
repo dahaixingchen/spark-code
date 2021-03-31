@@ -10,8 +10,8 @@ object StreamingAPIState {
       , Duration(2000))
     ssc.sparkContext.setLogLevel("error")
 
-    //直接接受本机端口号的数据
-    val data: ReceiverInputDStream[String] = ssc.socketTextStream("localhost",8889)
+    //直接接受node01机器，端口号为8889的数据 nc -lk 8889
+    val data: ReceiverInputDStream[String] = ssc.socketTextStream("node01",8889)
 
     //有状态的计算，计算出累计到达的单词的数量，来一个增一个，然后输入累计的结果
     //有状态的计算必须要用checkpoint
