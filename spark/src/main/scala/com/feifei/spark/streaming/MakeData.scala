@@ -24,6 +24,7 @@ object MakeData {
 
               printer.println(s"hello")
               printer.println(s"hi")
+              printer.println(s"hadoop")
 //              printer.println(s"hi")
               Thread.sleep(1000)
             }

@@ -3,6 +3,9 @@ package com.feifei.spark.streaming
 import org.apache.spark.SparkConf
 import org.apache.spark.streaming.dstream.{DStream, ReceiverInputDStream}
 import org.apache.spark.streaming.{Duration, State, StateSpec, StreamingContext}
+/**
+ * @todo: 状态相关的计算
+ */
 
 object StreamingAPIState {
   def main(args: Array[String]): Unit = {
@@ -39,23 +42,21 @@ object StreamingAPIState {
 
 
     //算窗口中的汇总--》每次都需要计算整个窗口的数据，
-//    data.flatMap(_.split(" ")).map((_,1)).reduceByKeyAndWindow(_+_,Duration(2000))
+    data.flatMap(_.split(" ")).map((_,1)).reduceByKeyAndWindow(_+_,Duration(2000))
 
     //算窗口中的汇总-->优化，利用一个窗口的滑动，只计算窗口中新增的数据
 //    reduceFunc: (V, V) => V,
 //    invReduceFunc: (V, V) => V,
-//    data.flatMap(_.split(" ")).map((_,1)).reduceByKeyAndWindow(
-//      //相当于reduce的需要的那个函数,同一个key需要两个以条以上的数据的时候才会触发这个函数
-//      (ov,nv)=>{
-//      ov + nv
-//    },
-//      (ov,oov)=>{
-//        ov -oov
-//      },Duration(6000),Duration(2000))
-
-
-
-
+    data.flatMap(_.split(" ")).map((_,1)).reduceByKeyAndWindow(
+      //相当于reduce的需要的那个函数,同一个key需要两个以条以上的数据的时候才会触发这个函数
+      (ov,nv)=>{
+        ov + nv
+      }
+      ,(ov,oov)=>{
+        ov -oov
+      }
+      ,Duration(6000)
+      ,Duration(2000))
 
     ssc.start()
     ssc.awaitTermination()
