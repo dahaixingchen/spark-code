@@ -25,6 +25,10 @@ object MakeData {
               printer.println(s"hello")
               printer.println(s"hi")
               printer.println(s"hadoop")
+              printer.println(s"360高清")
+              printer.println(s"标清")
+              printer.println(s"蓝光")
+              printer.println(s"4K")
 //              printer.println(s"hi")
               Thread.sleep(1000)
             }

@@ -7,7 +7,7 @@ import org.apache.spark.streaming.{Duration, Seconds, StreamingContext}
 object StreamingAPIWindonAndPublic {
   def main(args: Array[String]): Unit = {
     val ssc = new StreamingContext(new SparkConf().setAppName("api").setMaster("local[3]")
-      , Duration(1000))
+      , Duration(2000))
     ssc.sparkContext.setLogLevel("error")
 
     //直接接受本机端口号的数据
@@ -30,16 +30,16 @@ object StreamingAPIWindonAndPublic {
 //    data.window(Duration(6000),Duration(3000)).flatMap(_.split(" ")).map((_,1)).reduceByKey(_+_).print()
 
     //需求四：利用reduceByKeyAndWindow来实现上面的逻辑
-    data.flatMap(_.split(" ")).map((_,1)).reduceByKeyAndWindow((ov:Int,nv:Int)=>{ov+nv},Seconds(6),Seconds(3)).print()
+//    data.flatMap(_.split(" ")).map((_,1)).reduceByKeyAndWindow((ov:Int,nv:Int)=>{ov+nv},Seconds(6),Seconds(3)).print()
 
     //需求五：利用 reduceByKeyAndWindow 来优化窗口的逻辑
 
     //需求五：如果一个批次阻塞了，后面的job会怎样
     // 如下，如果代码过于复杂，执行的时间太久，其他的job就会阻塞，会导致10点钟到的数据，处理的时候可能已经是11点了，这种情况
-//    data.window(Seconds(6),Seconds(3)).flatMap(x=>{
-//      Thread.sleep(1000*60*60)
-//      x.split("")
-//    }).map((_,1)).reduceByKey(_+_).print()
+    data.window(Seconds(6),Seconds(12)).flatMap(x=>{
+      Thread.sleep(1000*60*60)
+      x.split("")
+    }).map((_,1)).reduceByKey(_+_).print()
 
 
 

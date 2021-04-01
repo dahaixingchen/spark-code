@@ -1,6 +1,7 @@
 HELP.md
 logs/
 out/
+data/
 export/
 check*
 receive*/

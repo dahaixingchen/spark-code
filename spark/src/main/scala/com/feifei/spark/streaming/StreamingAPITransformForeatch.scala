@@ -40,11 +40,12 @@ object StreamingAPITransformForeatch {
     //2、在末端用rdd的方式来处理流的问题
     data.foreachRDD((rdd) => {
       jobNum += 1
-      println(s"job级别的${jobNum}")
+//      println(s"job级别的${jobNum}")
       rdd.flatMap(_.split(" ")).map((_, 1)).reduceByKey(_ + _).foreach(println)
       rdd.map(x => {
-        println("task级别的")
-      }).foreach(println)
+//        println("task级别的")
+        (x,1)
+      }).foreachPartition(println) //可以在一步把数据写入到MySQL，Redis，Hbase，Hive等数据库中
     })
 
 
