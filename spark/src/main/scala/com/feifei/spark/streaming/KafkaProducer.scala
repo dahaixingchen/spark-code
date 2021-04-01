@@ -16,13 +16,14 @@ object KafkaProducer {
     val producer = new KafkaProducer[String,String](pro)
 
     while (true){
-      for (i<-1 to 3;j<-1 to 3){
+      for (i<- 1 to 3;j<- 1 to 3){
         val record: ProducerRecord[String,String] = new ProducerRecord[String,String]("ooxx",s"item$j",s"action$i")
         val records: Future[RecordMetadata] = producer.send(record)
         val metadata: RecordMetadata = records.get()
         val partition: Int = metadata.partition()
         val offset: Long = metadata.offset()
         println(s"item$j  action$i  partiton: $partition  offset: $offset")
+        Thread.sleep(1000*2)
       }
     }
     producer.close()
