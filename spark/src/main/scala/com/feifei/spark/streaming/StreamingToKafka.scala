@@ -15,7 +15,7 @@ object StreamingToKafka {
 
     conf.set("spark.streaming.backpressure.enabled", "true")
 
-    conf.set("spark.streaming.kafka.maxRatePerPartition", "3") //运行时状态每个分区拉取的条数
+    conf.set("spark.streaming.kafka.maxRatePerPartition", "300") //运行时状态每个分区拉取的条数
 //    conf.set("spark.streaming.backpressure.initialRate", "5") //起步状态，在2.3.4版本中不起作用
 //    conf.set("spark.streaming.receiver.maxRate", "3") //运行时状态，在2.3.4版本中不起作用
 
@@ -28,7 +28,7 @@ object StreamingToKafka {
       (ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "node01:9092,node02:9092"),
       (ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, classOf[StringDeserializer]),
       (ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, classOf[StringDeserializer]),
-      (ConsumerConfig.GROUP_ID_CONFIG, "bula31"),
+      (ConsumerConfig.GROUP_ID_CONFIG, "bula2"),
       (ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest")
     )
     val kafkaStream: InputDStream[ConsumerRecord[String, String]] = KafkaUtils.createDirectStream[String, String](
@@ -46,13 +46,7 @@ object StreamingToKafka {
 
       (k, (v, t, p, o))
     })
-//    dstream.mapWithState().print()
-    kafkaStream.foreachRDD(rdd =>{
-      //通过 HasOffsetRanges 可以调用私有的kafkaRdd
-      val ranges: Array[OffsetRange] = rdd.asInstanceOf[HasOffsetRanges].offsetRanges
-
-      kafkaStream.asInstanceOf[CanCommitOffsets].commitAsync(ranges)
-    } )
+    dstream.print()
 
     ssc.start()
     ssc.awaitTermination()

@@ -23,7 +23,7 @@ object KafkaProducer {
         val partition: Int = metadata.partition()
         val offset: Long = metadata.offset()
         println(s"item$j  action$i  partiton: $partition  offset: $offset")
-        Thread.sleep(1000*2)
+//        Thread.sleep(1000*2)
       }
     }
     producer.close()
