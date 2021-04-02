@@ -46,7 +46,7 @@ object StreamingToKafka {
 
       (k, (v, t, p, o))
     })
-    dstream..print()
+//    dstream.mapWithState().print()
     kafkaStream.foreachRDD(rdd =>{
       //通过 HasOffsetRanges 可以调用私有的kafkaRdd
       val ranges: Array[OffsetRange] = rdd.asInstanceOf[HasOffsetRanges].offsetRanges
