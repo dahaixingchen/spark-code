@@ -12,12 +12,12 @@ object StreamingToKafka {
   def main(args: Array[String]): Unit = {
     val conf: SparkConf = new SparkConf().setMaster("local[8]").setAppName("kafka-streaming")
 
-
+    //开启内部的被压机制，根据spark处理的速度有节奏的拉取Kafka的数据
     conf.set("spark.streaming.backpressure.enabled", "true")
 
     conf.set("spark.streaming.kafka.maxRatePerPartition", "300") //运行时状态每个分区拉取的条数
 //    conf.set("spark.streaming.backpressure.initialRate", "5") //起步状态，在2.3.4版本中不起作用
-//    conf.set("spark.streaming.receiver.maxRate", "3") //运行时状态，在2.3.4版本中不起作用
+    conf.set("spark.streaming.receiver.maxRate", "3") //运行时状态，在2.3.4版本中不起作用
 
     //如果为true，Spark会StreamingContext在JVM关闭时正常关闭，而不是立即关闭。
     conf.set("spark.streaming.stopGracefullyOnShutdown", "true")
